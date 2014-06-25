@@ -38,8 +38,42 @@ print_words() and print_top().
 """
 
 import sys
+from collections import defaultdict
 
-# +++your code here+++
+def helper(fis):
+    import pdb; pdb.set_trace()
+    f = open ("fis","r")
+    dict={}
+    lista = []
+    for line in f:
+        lista += line.split()
+    lista.sort()
+    counter = 0
+    j = counter + 1
+    while counter < len(lista):
+        while lista[counter] == lista[j]:
+            if lista[counter] in dict.keys():
+                    dict[lista[counter]] += 1
+            else:
+                    dict[lista[counter]] = 1
+            j = j + 1;
+        counter = j + 1
+        j = counter + 1
+
+    return dict
+
+
+def print_words(filename):
+    #dictionar = helper(filename)
+    f = open(filename, "r")
+    dict = defaultdict(int)
+    for line in f:
+        words = line.split()
+        for word in words:
+            dict[word] += 1
+    for word in dict:
+        print "{0} - {1}".format(word, dict[word])
+
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
